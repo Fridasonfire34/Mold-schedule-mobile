@@ -85,6 +85,14 @@ android {
         versionCode 1
         versionName "1.0"
     }
+    // Windows: the native (C++) intermediates of the release build go past
+    // the 260-character path limit under this project's folder, so they're
+    // built in a short folder instead.
+    externalNativeBuild {
+        cmake {
+            buildStagingDirectory file("C:/msb/cxx")
+        }
+    }
     signingConfigs {
         debug {
             storeFile file('debug.keystore')
@@ -117,3 +125,5 @@ dependencies {
         implementation jscFlavor
     }
 }
+
+apply from: file("../../node_modules/react-native-vector-icons/fonts.gradle")
